@@ -1,0 +1,41 @@
+[
+  {
+    "type": "subscribed",
+    "target": {
+      "kind": "opencode-session",
+      "id": "ses_abc"
+    }
+  },
+  {
+    "type": "event",
+    "target": {
+      "kind": "opencode-session",
+      "id": "ses_abc"
+    },
+    "events": [
+      {
+        "id": "agent.message:c_7f3a9b2c:1",
+        "target": {
+          "kind": "opencode-session",
+          "id": "ses_abc"
+        },
+        "kind": "agent.message",
+        "actionable": true,
+        "at": 1790000000001,
+        "text": "[recurse] message from child auth-reviewer (c_7f3a9b2c):\n\nFound 2 issues.",
+        "payload": {
+          "from": {
+            "role": "child",
+            "name": "auth-reviewer",
+            "child_id": "c_7f3a9b2c"
+          },
+          "message": "Found 2 issues."
+        }
+      }
+    ]
+  },
+  {
+    "type": "heartbeat",
+    "at": 1790000000000
+  }
+]

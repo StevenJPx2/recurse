@@ -1,0 +1,466 @@
+{
+  "health": {
+    "request": {
+      "id": 1,
+      "method": "health",
+      "params": {}
+    },
+    "response": {
+      "id": 1,
+      "result": {
+        "ok": true,
+        "name": "recurse",
+        "version": "0.1.0",
+        "protocol": 1,
+        "pid": 4242,
+        "started_at": 1790000000000
+      }
+    }
+  },
+  "target.register": {
+    "request": {
+      "id": 2,
+      "method": "target.register",
+      "params": {
+        "target": {
+          "kind": "opencode-session",
+          "id": "ses_abc"
+        },
+        "cwd": "/abs/project",
+        "host": {
+          "name": "opencode",
+          "version": "2.0.14",
+          "supports_children": true
+        },
+        "model": "anthropic/claude-sonnet-5"
+      }
+    },
+    "response": {
+      "id": 2,
+      "result": {
+        "target": {
+          "kind": "opencode-session",
+          "id": "ses_abc"
+        },
+        "depth": 0,
+        "parent": null,
+        "child": null
+      }
+    }
+  },
+  "target.register.child": {
+    "request": {
+      "id": 3,
+      "method": "target.register",
+      "params": {
+        "target": {
+          "kind": "opencode-session",
+          "id": "ses_child"
+        },
+        "cwd": "/abs/project",
+        "host": {
+          "name": "opencode",
+          "supports_children": true
+        }
+      }
+    },
+    "response": {
+      "id": 3,
+      "result": {
+        "target": {
+          "kind": "opencode-session",
+          "id": "ses_child"
+        },
+        "depth": 1,
+        "parent": {
+          "kind": "opencode-session",
+          "id": "ses_abc"
+        },
+        "child": {
+          "child_id": "c_7f3a9b2c",
+          "name": "auth-reviewer",
+          "task": "Review the authentication flow for security issues",
+          "model": "anthropic/claude-sonnet-5",
+          "status": "running",
+          "parent": {
+            "kind": "opencode-session",
+            "id": "ses_abc"
+          },
+          "session": {
+            "kind": "opencode-session",
+            "id": "ses_child"
+          },
+          "session_dir": "/abs/project",
+          "depth": 1,
+          "created_at": 1790000000000
+        }
+      }
+    }
+  },
+  "kernel.execute": {
+    "request": {
+      "id": 4,
+      "method": "kernel.execute",
+      "params": {
+        "target": {
+          "kind": "opencode-session",
+          "id": "ses_abc"
+        },
+        "code": "print('hi')\n1 + 1",
+        "timeout_sec": 600
+      }
+    },
+    "response": {
+      "id": 4,
+      "result": {
+        "status": "ok",
+        "stdout": "hi\n",
+        "stderr": "",
+        "result": "2",
+        "error": null,
+        "execution_count": 1,
+        "duration_ms": 3,
+        "truncated": false
+      }
+    }
+  },
+  "kernel.execute.error": {
+    "request": {
+      "id": 5,
+      "method": "kernel.execute",
+      "params": {
+        "target": {
+          "kind": "opencode-session",
+          "id": "ses_abc"
+        },
+        "code": "1/0"
+      }
+    },
+    "response": {
+      "id": 5,
+      "result": {
+        "status": "error",
+        "stdout": "",
+        "stderr": "",
+        "result": null,
+        "error": {
+          "ename": "ZeroDivisionError",
+          "evalue": "division by zero",
+          "traceback": "Traceback (most recent call last):\n  File \"<cell 2>\", line 1, in <module>\nZeroDivisionError: division by zero"
+        },
+        "execution_count": 2,
+        "duration_ms": 1,
+        "truncated": false
+      }
+    }
+  },
+  "kernel.execute.busy": {
+    "request": {
+      "id": 6,
+      "method": "kernel.execute",
+      "params": {
+        "target": {
+          "kind": "opencode-session",
+          "id": "ses_abc"
+        },
+        "code": "2"
+      }
+    },
+    "response": {
+      "id": 6,
+      "error": {
+        "code": "busy",
+        "message": "a cell is already running for opencode-session:ses_abc"
+      }
+    }
+  },
+  "kernel.interrupt": {
+    "request": {
+      "id": 7,
+      "method": "kernel.interrupt",
+      "params": {
+        "target": {
+          "kind": "opencode-session",
+          "id": "ses_abc"
+        }
+      }
+    },
+    "response": {
+      "id": 7,
+      "result": {
+        "interrupted": false
+      }
+    }
+  },
+  "kernel.restart": {
+    "request": {
+      "id": 8,
+      "method": "kernel.restart",
+      "params": {
+        "target": {
+          "kind": "opencode-session",
+          "id": "ses_abc"
+        }
+      }
+    },
+    "response": {
+      "id": 8,
+      "result": {
+        "restarted": true
+      }
+    }
+  },
+  "kernel.status": {
+    "request": {
+      "id": 9,
+      "method": "kernel.status",
+      "params": {
+        "target": {
+          "kind": "opencode-session",
+          "id": "ses_abc"
+        }
+      }
+    },
+    "response": {
+      "id": 9,
+      "result": {
+        "state": "idle",
+        "pid": 5151,
+        "execution_count": 12,
+        "started_at": 1790000000000,
+        "cwd": "/abs/project",
+        "handles": [
+          {
+            "handle_id": "h3",
+            "pid": 777,
+            "command": "npm test",
+            "running": true
+          }
+        ]
+      }
+    }
+  },
+  "children.list": {
+    "request": {
+      "id": 10,
+      "method": "children.list",
+      "params": {
+        "target": {
+          "kind": "opencode-session",
+          "id": "ses_abc"
+        }
+      }
+    },
+    "response": {
+      "id": 10,
+      "result": {
+        "children": [
+          {
+            "child_id": "c_7f3a9b2c",
+            "name": "auth-reviewer",
+            "task": "Review the authentication flow for security issues",
+            "model": "anthropic/claude-sonnet-5",
+            "status": "pending",
+            "parent": {
+              "kind": "opencode-session",
+              "id": "ses_abc"
+            },
+            "session": null,
+            "session_dir": "/abs/project",
+            "depth": 1,
+            "created_at": 1790000000000
+          }
+        ]
+      }
+    }
+  },
+  "children.bind": {
+    "request": {
+      "id": 11,
+      "method": "children.bind",
+      "params": {
+        "target": {
+          "kind": "opencode-session",
+          "id": "ses_abc"
+        },
+        "child_id": "c_7f3a9b2c",
+        "session": {
+          "kind": "opencode-session",
+          "id": "ses_child"
+        }
+      }
+    },
+    "response": {
+      "id": 11,
+      "result": {
+        "child": {
+          "child_id": "c_7f3a9b2c",
+          "name": "auth-reviewer",
+          "task": "Review the authentication flow for security issues",
+          "model": "anthropic/claude-sonnet-5",
+          "status": "running",
+          "parent": {
+            "kind": "opencode-session",
+            "id": "ses_abc"
+          },
+          "session": {
+            "kind": "opencode-session",
+            "id": "ses_child"
+          },
+          "session_dir": "/abs/project",
+          "depth": 1,
+          "created_at": 1790000000000
+        }
+      }
+    }
+  },
+  "children.fail": {
+    "request": {
+      "id": 12,
+      "method": "children.fail",
+      "params": {
+        "target": {
+          "kind": "opencode-session",
+          "id": "ses_abc"
+        },
+        "child_id": "c_7f3a9b2c",
+        "reason": "model unavailable"
+      }
+    },
+    "response": {
+      "id": 12,
+      "result": {
+        "child": {
+          "child_id": "c_7f3a9b2c",
+          "name": "auth-reviewer",
+          "task": "Review the authentication flow for security issues",
+          "model": "anthropic/claude-sonnet-5",
+          "status": "failed",
+          "parent": {
+            "kind": "opencode-session",
+            "id": "ses_abc"
+          },
+          "session": null,
+          "session_dir": "/abs/project",
+          "depth": 1,
+          "created_at": 1790000000000
+        }
+      }
+    }
+  },
+  "children.delete": {
+    "request": {
+      "id": 13,
+      "method": "children.delete",
+      "params": {
+        "target": {
+          "kind": "opencode-session",
+          "id": "ses_abc"
+        },
+        "child_id": "c_7f3a9b2c"
+      }
+    },
+    "response": {
+      "id": 13,
+      "result": {
+        "child": {
+          "child_id": "c_7f3a9b2c",
+          "name": "auth-reviewer",
+          "task": "Review the authentication flow for security issues",
+          "model": "anthropic/claude-sonnet-5",
+          "status": "deleted",
+          "parent": {
+            "kind": "opencode-session",
+            "id": "ses_abc"
+          },
+          "session": {
+            "kind": "opencode-session",
+            "id": "ses_child"
+          },
+          "session_dir": "/abs/project",
+          "depth": 1,
+          "created_at": 1790000000000
+        }
+      }
+    }
+  },
+  "events.ack": {
+    "request": {
+      "id": 14,
+      "method": "events.ack",
+      "params": {
+        "target": {
+          "kind": "opencode-session",
+          "id": "ses_abc"
+        },
+        "event_ids": [
+          "agent.message:c_7f3a9b2c:1"
+        ]
+      }
+    },
+    "response": {
+      "id": 14,
+      "result": {
+        "acked": 1
+      }
+    }
+  },
+  "events.list": {
+    "request": {
+      "id": 15,
+      "method": "events.list",
+      "params": {
+        "target": {
+          "kind": "opencode-session",
+          "id": "ses_abc"
+        }
+      }
+    },
+    "response": {
+      "id": 15,
+      "result": {
+        "events": []
+      }
+    }
+  },
+  "skills.list": {
+    "request": {
+      "id": 16,
+      "method": "skills.list",
+      "params": {
+        "target": {
+          "kind": "opencode-session",
+          "id": "ses_abc"
+        }
+      }
+    },
+    "response": {
+      "id": 16,
+      "result": {
+        "skills": [
+          {
+            "name": "core",
+            "description": "How to work in a recurse session.",
+            "path": "/opt/recurse/skills/core/SKILL.md",
+            "python": null,
+            "hidden": false
+          }
+        ]
+      }
+    }
+  },
+  "error.invalid": {
+    "request": {
+      "id": 17,
+      "method": "nope",
+      "params": {}
+    },
+    "response": {
+      "id": 17,
+      "error": {
+        "code": "invalid_request",
+        "message": "unknown method nope"
+      }
+    }
+  }
+}

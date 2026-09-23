@@ -1,0 +1,102 @@
+{
+  "child.spawn": {
+    "id": "child.spawn:c_7f3a9b2c",
+    "target": {
+      "kind": "opencode-session",
+      "id": "ses_abc"
+    },
+    "kind": "child.spawn",
+    "actionable": false,
+    "at": 1790000000000,
+    "text": "[recurse] spawning child auth-reviewer (c_7f3a9b2c)",
+    "payload": {
+      "child": {
+        "child_id": "c_7f3a9b2c",
+        "name": "auth-reviewer",
+        "task": "Review the authentication flow for security issues",
+        "model": "anthropic/claude-sonnet-5",
+        "status": "pending",
+        "parent": {
+          "kind": "opencode-session",
+          "id": "ses_abc"
+        },
+        "session": null,
+        "session_dir": "/abs/project",
+        "depth": 1,
+        "created_at": 1790000000000
+      },
+      "prompt": "Review the authentication flow for security issues\n\n---\nYou are recurse child `auth-reviewer` (c_7f3a9b2c). When you have an answer, reply with `await agent_message.send(message, receiver_role=\"parent\")`."
+    }
+  },
+  "agent.message": {
+    "id": "agent.message:c_7f3a9b2c:1",
+    "target": {
+      "kind": "opencode-session",
+      "id": "ses_abc"
+    },
+    "kind": "agent.message",
+    "actionable": true,
+    "at": 1790000000001,
+    "text": "[recurse] message from child auth-reviewer (c_7f3a9b2c):\n\nFound 2 issues.",
+    "payload": {
+      "from": {
+        "role": "child",
+        "name": "auth-reviewer",
+        "child_id": "c_7f3a9b2c"
+      },
+      "message": "Found 2 issues."
+    }
+  },
+  "agent.message.to-child": {
+    "id": "agent.message:opencode-session:ses_abc:1",
+    "target": {
+      "kind": "opencode-session",
+      "id": "ses_child"
+    },
+    "kind": "agent.message",
+    "actionable": true,
+    "at": 1790000000002,
+    "text": "[recurse] message from parent:\n\nCheck the newly added regression test.",
+    "payload": {
+      "from": {
+        "role": "parent",
+        "name": null,
+        "child_id": null
+      },
+      "message": "Check the newly added regression test."
+    }
+  },
+  "bash.finished": {
+    "id": "bash.finished:5151:h3",
+    "target": {
+      "kind": "opencode-session",
+      "id": "ses_abc"
+    },
+    "kind": "bash.finished",
+    "actionable": true,
+    "at": 1790000000003,
+    "text": "[recurse] Background command finished: pid 777, exit 1 (npm test). Inspect the saved handle with poll(), output(), or tail() and continue the task.",
+    "payload": {
+      "handle_id": "h3",
+      "pid": 777,
+      "exit_code": 1,
+      "command": "npm test"
+    }
+  },
+  "kernel.exited": {
+    "id": "kernel.exited:5151",
+    "target": {
+      "kind": "opencode-session",
+      "id": "ses_abc"
+    },
+    "kind": "kernel.exited",
+    "actionable": false,
+    "at": 1790000000004,
+    "text": "[recurse] Python kernel 5151 exited (signal 9). Its state is gone; the next ipython call starts a fresh kernel.",
+    "payload": {
+      "pid": 5151,
+      "exit_code": null,
+      "signal": 9
+    }
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "to_kernel": [
+    {
+      "type": "execute",
+      "id": "x1",
+      "code": "print('hi')\n1 + 1",
+      "timeout_ms": 600000
+    },
+    {
+      "type": "interrupt"
+    },
+    {
+      "type": "host_response",
+      "id": "r4",
+      "result": {
+        "child_id": "c_7f3a9b2c",
+        "name": "auth-reviewer",
+        "task": "Review the authentication flow for security issues",
+        "model": "anthropic/claude-sonnet-5",
+        "status": "pending",
+        "parent": {
+          "kind": "opencode-session",
+          "id": "ses_abc"
+        },
+        "session": null,
+        "session_dir": "/abs/project",
+        "depth": 1,
+        "created_at": 1790000000000
+      }
+    },
+    {
+      "type": "host_response",
+      "id": "r5",
+      "error": {
+        "code": "depth_exceeded",
+        "message": "children may not spawn children (RECURSE_MAX_DEPTH=1)"
+      }
+    },
+    {
+      "type": "shutdown"
+    }
+  ],
+  "from_kernel": [
+    {
+      "type": "ready",
+      "pid": 5151,
+      "python": "3.14.7",
+      "protocol": 1
+    },
+    {
+      "type": "execute_result",
+      "id": "x1",
+      "result": {
+        "status": "ok",
+        "stdout": "hi\n",
+        "stderr": "",
+        "result": "2",
+        "error": null,
+        "execution_count": 1,
+        "duration_ms": 3,
+        "truncated": false
+      }
+    },
+    {
+      "type": "host_request",
+      "id": "r4",
+      "method": "rlm.spawn",
+      "params": {
+        "task": "Review the authentication flow for security issues",
+        "name": "auth-reviewer"
+      }
+    },
+    {
+      "type": "host_request",
+      "id": "r6",
+      "method": "agent_message.send",
+      "params": {
+        "message": "Found 2 issues.",
+        "receiver_role": "parent"
+      }
+    },
+    {
+      "type": "host_request",
+      "id": "r7",
+      "method": "notice.bash_finished",
+      "params": {
+        "handle_id": "h3",
+        "pid": 777,
+        "exit_code": 1,
+        "command": "npm test"
+      }
+    },
+    {
+      "type": "host_request",
+      "id": "r8",
+      "method": "notice.withdraw",
+      "params": {
+        "event_id": "bash.finished:5151:h3"
+      }
+    },
+    {
+      "type": "handles",
+      "handles": [
+        {
+          "handle_id": "h3",
+          "pid": 777,
+          "command": "npm test",
+          "running": true
+        }
+      ]
+    },
+    {
+      "type": "log",
+      "level": "warn",
+      "message": "skill release-audit failed to import"
+    }
+  ]
+}
