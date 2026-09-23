@@ -1,0 +1,19 @@
+{
+  "name": "@recurse/opencode",
+  "version": "0.1.0",
+  "description": "OpenCode V2 server plugin for recurse.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@opencode/plugin": "2.0.15",
+    "@recurse/client": "*"
+  },
+  "private": true
+}

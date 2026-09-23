@@ -1,0 +1,27 @@
+{
+  "name": "recurse",
+  "version": "0.1.0",
+  "description": "Recursive language model programming for coding-agent hosts.",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "workspaces": [
+    "packages/*",
+    "adapters/*"
+  ],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "build:tests": "node scripts/build-tests.mjs",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "node scripts/build-tests.mjs && node --test \"packages/*/dist-tests/**/*.test.js\" \"adapters/*/dist-tests/**/*.test.js\"",
+    "check": "npm run build && npm run typecheck && npm run test"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.2",
+    "esbuild": "0.28.2",
+    "typescript": "7.0.2"
+  }
+}
